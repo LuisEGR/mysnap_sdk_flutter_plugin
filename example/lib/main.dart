@@ -19,7 +19,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    initPlatformState();
+
   }
 
   // Platform messages are asynchronous, so we initialize in an async method.
@@ -50,7 +50,18 @@ class _MyAppState extends State<MyApp> {
           title: const Text('Plugin example app'),
         ),
         body: Center(
-          child: Text('Running on: $_platformVersion\n'),
+          child: Column(
+            children: <Widget>[
+              Text('Running on: $_platformVersion\n'),
+              RaisedButton(
+                onPressed: () => {
+                  initPlatformState()
+                },
+                child: Text("START!"),
+              )
+            ],
+          )
+            ,
         ),
       ),
     );

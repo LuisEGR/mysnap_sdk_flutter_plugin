@@ -1,6 +1,7 @@
-include ':my_snap_sdk', ':api-release', ':flutter', ':misnapcamera-release'
+include ':my_snap_sdk', ':api-release', ':flutter', ':misnapcamera-release', ':misnapworkflow-release'
 include ':api-release'
 
 project(':my_snap_sdk').projectDir = file('android')
 project(':api-release').projectDir = file('android/api-release')
 project(':misnapcamera-release').projectDir = file('android/misnapcamera-release')
+project(':misnapworkflow-release').projectDir = file('android/misnapworkflow-release')
