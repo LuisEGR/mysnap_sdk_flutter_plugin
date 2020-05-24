@@ -3,6 +3,7 @@ package net.stratplus.my_snap_sdk;
 
 import android.content.Context;
 import android.content.Intent;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.app.Activity;
 
@@ -128,7 +129,7 @@ public class MySnapSdkPlugin implements FlutterPlugin, MethodCallHandler, Activi
 
     if (call.method.equals("getPlatformVersion")) {
       startMiSnapWorkflow(MiSnapApi.PARAMETER_DOCTYPE_ID_CARD_FRONT);
-      result.success("Android " + android.os.Build.VERSION.RELEASE);
+      //result.success("Android " + android.os.Build.VERSION.RELEASE);
     } else {
       result.notImplemented();
     }
@@ -138,6 +139,8 @@ public class MySnapSdkPlugin implements FlutterPlugin, MethodCallHandler, Activi
   public void onDetachedFromEngine(@NonNull FlutterPluginBinding binding) {
     channel.setMethodCallHandler(null);
   }
+
+ 
 
 
   private void startMiSnapWorkflow(String docType) {
@@ -169,6 +172,17 @@ public class MySnapSdkPlugin implements FlutterPlugin, MethodCallHandler, Activi
     Intent intentMiSnap;
     intentMiSnap = new Intent(context, MiSnapWorkflowActivity.class);
     intentMiSnap.putExtra(MiSnapApi.JOB_SETTINGS, misnapParams.toString());
+    //activity.startActivity(intentMiSnap);
+
+
+    /// THIS IS WORKING!!---
+    /*
+    Intent i = new Intent("android.intent.action.PICK",
+            MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+    i.setType("image/*");
+    activity.startActivityForResult(i,  MiSnapApi.RESULT_PICTURE_CODE);
+    */
+
     activity.startActivityForResult(intentMiSnap, MiSnapApi.RESULT_PICTURE_CODE);
   }
 

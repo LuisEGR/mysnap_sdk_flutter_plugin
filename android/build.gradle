@@ -36,7 +36,13 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.0.2'
     implementation (project(':api-release'))
     implementation (project(':misnapcamera-release'))
+    implementation (project(':mibidata-release'))
+    implementation (project(':imageutils-release'))
+    implementation (project(':misnapscience-release'))
+    implementation (project(':sanselan-release'))
     implementation project(':misnapworkflow-release')
+    implementation project(':misnapcontroller-release')
+
     implementation "com.android.support:percent"
     implementation "com.android.support.constraint:constraint-layout"
 }
