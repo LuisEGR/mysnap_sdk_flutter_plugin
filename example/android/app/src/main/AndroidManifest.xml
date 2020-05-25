@@ -10,7 +10,7 @@
         android:label="my_snap_sdk_example">
         <activity
             android:name=".MainActivity"
-            android:launchMode="singleTop"
+            android:launchMode="standard"
             android:theme="@style/LaunchTheme"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
             android:hardwareAccelerated="true"
@@ -43,6 +43,8 @@
             android:launchMode="standard"
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
+
+        <activity android:label="MyLabel" android:name="MiSnapWorkflowActivity"/>
 
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->

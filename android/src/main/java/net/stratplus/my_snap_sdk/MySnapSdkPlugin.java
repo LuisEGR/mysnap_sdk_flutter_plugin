@@ -25,6 +25,9 @@ import com.miteksystems.misnap.misnapworkflow.MiSnapWorkflowActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import androidx.lifecycle.Lifecycle;
+
+
 
 /** MySnapSdkPlugin */
 public class MySnapSdkPlugin implements FlutterPlugin, MethodCallHandler, ActivityAware {
@@ -36,12 +39,10 @@ public class MySnapSdkPlugin implements FlutterPlugin, MethodCallHandler, Activi
   private Context context;
 
   public MySnapSdkPlugin() {
+    Log.d("MYAg", "Constructor no activity:");
     this.activity = null;
   }
 
-  public MySnapSdkPlugin(Activity activity) {
-    this.activity = activity;
-  }
 
 
   /// The MethodChannel that will the communication between Flutter and native Android
@@ -72,6 +73,21 @@ public class MySnapSdkPlugin implements FlutterPlugin, MethodCallHandler, Activi
 
   @Override
   public void onAttachedToActivity(ActivityPluginBinding activityPluginBinding) {
+
+    Lifecycle lifecycle = FlutterLifecycleAdapter.getActivityLifecycle(activityPluginBinding);
+
+    if (lifecycle == null) {
+      Log.d("MATAG", "Couldn't obtained Lifecycle!");
+      return;
+      // TODO(amirh): make this throw once the lifecycle API is available on stable.
+      // https://github.com/flutter/flutter/issues/42875
+      // throw new RuntimeException(
+      //     "The FlutterLifecycleAdapter did not correctly provide a Lifecycle instance. Source reference: "
+      //         + flutterPluginBinding.getLifecycle());
+    }
+    Log.d("MATAG", "Successfully obtained Lifecycle: " + lifecycle);
+
+
     // TODO: your plugin is now attached to an Activity
     Log.d("MYSNAP!!!!", "Atached to activity!!!!!!");
     this.activity = activityPluginBinding.getActivity();
@@ -98,6 +114,7 @@ public class MySnapSdkPlugin implements FlutterPlugin, MethodCallHandler, Activi
     // TODO: your plugin is no longer associated with an Activity.
     Log.d("MYSNAP!!!!", "onDetachedFromActivity!!!!!!");
     // Clean up references.
+
   }
 
 
@@ -116,7 +133,7 @@ public class MySnapSdkPlugin implements FlutterPlugin, MethodCallHandler, Activi
   // in the same class.
   public static void registerWith(Registrar registrar) {
     final MethodChannel channel = new MethodChannel(registrar.messenger(), "my_snap_sdk");
-    channel.setMethodCallHandler(new MySnapSdkPlugin(registrar.activity()));
+    channel.setMethodCallHandler(new MySnapSdkPlugin());
   }
 
   @Override
@@ -175,6 +192,8 @@ public class MySnapSdkPlugin implements FlutterPlugin, MethodCallHandler, Activi
     Log.d("MYTAG", "IntentSchema:"+intentMiSnap.getScheme());
     Log.d("MYTAG", "IntentFlags:"+intentMiSnap.getFlags());
 
+
+
     //activity.startActivity(intentMiSnap);
 
 
@@ -188,6 +207,8 @@ public class MySnapSdkPlugin implements FlutterPlugin, MethodCallHandler, Activi
 
     try {
       activity.startActivity(intentMiSnap);
+      Log.d("MYTAG", "ActivityStarted-1");
+
     }catch (Exception e) {
       Log.e("MyActivity::MyMethod", e.getMessage());
     }
