@@ -1,4 +1,4 @@
-include ':my_snap_sdk', ':api-release', ':flutter', ':misnapcamera-release', ':misnapworkflow-release', ':misnapscience-release', ':mibidata-release', ':imageutils-release', ':misnapcontroller-release', ':sanselan-release'
+include ':my_snap_sdk', ':api-release', ':flutter', ':misnapcamera-release', ':misnapworkflow-release', ':misnapscience-release', ':mibidata-release', ':imageutils-release', ':misnapcontroller-release', ':sanselan-release', ':misnapworkflow_UX2-release'
 include ':api-release'
 
 project(':my_snap_sdk').projectDir = file('android')
@@ -10,3 +10,5 @@ project(':mibidata-release').projectDir = file('android/mibidata-release')
 project(':imageutils-release').projectDir = file('android/imageutils-release')
 project(':misnapcontroller-release').projectDir = file('android/misnapcontroller-release')
 project(':sanselan-release').projectDir = file('android/sanselan-release')
+project(':misnapworkflow_UX2-release').projectDir = file('android/misnapworkflow_UX2-release')
+
