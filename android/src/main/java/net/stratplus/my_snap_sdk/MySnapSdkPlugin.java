@@ -18,7 +18,7 @@ import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
 import io.flutter.plugin.common.PluginRegistry.Registrar;
 import io.flutter.plugin.common.BinaryMessenger;
-
+import com.miteksystems.misnap.misnapworkflow.params.WorkflowApi;
 import com.miteksystems.misnap.params.MiSnapApi;
 import com.miteksystems.misnap.params.CameraApi;
 import com.miteksystems.misnap.misnapworkflow.MiSnapWorkflowActivity;
@@ -160,7 +160,7 @@ public class MySnapSdkPlugin implements FlutterPlugin, MethodCallHandler, Activi
       misnapParams.put(CameraApi.MiSnapAllowScreenshots, 1);
       // e.g. misnapParams.put(MiSnapApi.AppVersion, "1.0");
       // Workflow parameters are now put into the same JSONObject as MiSnap parameters
-      //misnapParams.put(WorkflowApi.MiSnapTrackGlare, WorkflowApi.TRACK_GLARE_ENABLED);
+      misnapParams.put(WorkflowApi.MiSnapTrackGlare, WorkflowApi.TRACK_GLARE_ENABLED);
       //misnapParams.put(CameraApi.MiSnapFocusMode, CameraApi.PARAMETER_FOCUS_MODE_HYBRID_NEW);
     } catch (JSONException e) {
       e.printStackTrace();
@@ -172,6 +172,9 @@ public class MySnapSdkPlugin implements FlutterPlugin, MethodCallHandler, Activi
     Intent intentMiSnap;
     intentMiSnap = new Intent(context, MiSnapWorkflowActivity.class);
     intentMiSnap.putExtra(MiSnapApi.JOB_SETTINGS, misnapParams.toString());
+    Log.d("MYTAG", "IntentSchema:"+intentMiSnap.getScheme());
+    Log.d("MYTAG", "IntentFlags:"+intentMiSnap.getFlags());
+
     //activity.startActivity(intentMiSnap);
 
 
@@ -183,8 +186,14 @@ public class MySnapSdkPlugin implements FlutterPlugin, MethodCallHandler, Activi
     activity.startActivityForResult(i,  MiSnapApi.RESULT_PICTURE_CODE);
     */
 
-    activity.startActivityForResult(intentMiSnap, MiSnapApi.RESULT_PICTURE_CODE);
-  }
+    try {
+      activity.startActivity(intentMiSnap);
+    }catch (Exception e) {
+      Log.e("MyActivity::MyMethod", e.getMessage());
+    }
+
+
+    }
 
 
 
