@@ -1,20 +1,28 @@
-include ':my_snap_sdk', ':api-release', ':flutter', ':misnapcamera-release', ':misnapworkflow-release', ':misnapscience-release', ':mibidata-release', ':imageutils-release', ':misnapcontroller-release', ':sanselan-release', ':misnapworkflow_UX2-release', ':barcode-release', ':barcodecontroller', ':cardio-release', ':creditcardcontroller', ':misnaphybridcontroller'
+include ':my_snap_sdk', ':api-release', ':flutter', ':misnapcamera-release', ':misnapworkflow-release', ':misnapscience-release', ':mibidata-release', ':imageutils-release', ':misnapcontroller-release', ':sanselan-release', ':misnapworkflow_UX2-release', ':barcode-release', ':barcodecontroller-release', ':misnaphybridcontroller-release', ':cardio-release', ':creditcardcontroller-release'
 include ':api-release'
 
+
 project(':my_snap_sdk').projectDir = file('android')
+project(':flutter').projectDir = file('flutter')
+
 project(':api-release').projectDir = file('android/api-release')
 project(':misnapcamera-release').projectDir = file('android/misnapcamera-release')
 project(':misnapscience-release').projectDir = file('android/misnapscience-release')
 project(':mibidata-release').projectDir = file('android/mibidata-release')
 project(':imageutils-release').projectDir = file('android/imageutils-release')
-project(':misnapcontroller-release').projectDir = file('android/misnapcontroller')
-project(':misnapworkflow-release').projectDir = file('android/misnapworkflow')
+
 project(':sanselan-release').projectDir = file('android/sanselan-release')
+
+
+project(':cardio-release').projectDir = file('android/cardio-release')
+
+
+project(':misnapcontroller-release').projectDir = file('android/misnapcontroller-release')
+project(':misnapworkflow-release').projectDir = file('android/misnapworkflow-release')
 project(':misnapworkflow_UX2-release').projectDir = file('android/misnapworkflow_UX2-release')
+project(':creditcardcontroller-release').projectDir = file('android/creditcardcontroller-release')
+project(':misnaphybridcontroller-release').projectDir = file('android/misnaphybridcontroller-release')
 
 
 project(':barcode-release').projectDir = file('android/barcode-release')
-project(':barcodecontroller').projectDir = file('android/barcodecontroller')
-project(':cardio-release').projectDir = file('android/cardio-release')
-project(':creditcardcontroller').projectDir = file('android/creditcardcontroller')
-project(':misnaphybridcontroller').projectDir = file('android/misnaphybridcontroller')
+project(':barcodecontroller-release').projectDir = file('android/barcodecontroller-release')
