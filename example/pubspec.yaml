@@ -11,6 +11,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  http: 0.12.1
+  transparent_image: 1.0.0
 
   my_snap_sdk:
     # When depending on this package from a real application you should use:
