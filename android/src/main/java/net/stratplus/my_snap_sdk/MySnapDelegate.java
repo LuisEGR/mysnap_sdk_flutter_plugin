@@ -3,11 +3,13 @@ package net.stratplus.my_snap_sdk;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Point;
 import android.util.Log;
 import android.util.Base64;
 
@@ -26,6 +28,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.PluginRegistry;
@@ -53,6 +56,12 @@ public class MySnapDelegate implements PluginRegistry.ActivityResultListener{
         }
 
 
+
+        ArrayList<Point> fc = data.getParcelableArrayListExtra(MiSnapApi.RESULT_FOUR_CORNERS);
+
+
+
+
         //pendingResult.success("Android READY MDFCK!");
         //result.success("Android " + android.os.Build.VERSION.RELEASE);
 
@@ -66,14 +75,34 @@ public class MySnapDelegate implements PluginRegistry.ActivityResultListener{
         //}
 
         imageBitmap = formBitmapImage(rawImage);
-        byte[] B64 = bitmapToPngB64(imageBitmap);
+
+        Log.d("WIDTH", imageBitmap.getWidth()+"");
+        Log.d("HEIGHT", imageBitmap.getHeight()+"");
+
+        Log.d("FOurCorn:", fc.toString());
+
+        int x, y, maxX, maxY, w, h;
+        int margen = 10;
+
+        x = Math.min(fc.get(0).x, fc.get(3).x) - margen;
+        y = Math.min(fc.get(0).y, fc.get(1).y) - margen;
+        maxX = Math.max(fc.get(1).x, fc.get(2).x) + margen;
+        maxY = Math.max(fc.get(3).y, fc.get(2).y) + margen;
+        w = maxX - x;
+        h = maxY - y;
+
+
+
+        Bitmap bitmapCortado = Bitmap.createBitmap(imageBitmap, x, y, w, h);
+
+        imageBitmap.recycle();
+        byte[] B64 = bitmapToPngB64(bitmapCortado);
         Log.d("B64Len", B64.length+"");
+        bitmapCortado.recycle();
 
         //Log.d("IMAGE_PNG:", B64);
-
+        this.activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         pendingResult.success(B64);
-
-
         return false;
     }
 
@@ -121,10 +150,12 @@ public class MySnapDelegate implements PluginRegistry.ActivityResultListener{
             misnapParams.put(MiSnapApi.MiSnapDocumentType, docType);
             misnapParams.put(WorkflowApi.MiSnapTrackGlare, "1");
             misnapParams.put(CameraApi.MiSnapFocusMode, CameraApi.PARAMETER_FOCUS_MODE_HYBRID);
+            misnapParams.put(MiSnapApi.MiSnapOrientation, ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
             Intent intentMiSnap = new Intent(context, MiSnapWorkflowActivity_UX2.class);
             intentMiSnap.putExtra(MiSnapApi.JOB_SETTINGS, misnapParams.toString());
             System.out.println("Running MiSnap...");
             setPendingResult(result);
+            //this.activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
             this.activity.startActivityForResult(intentMiSnap, MiSnapApi.RESULT_PICTURE_CODE);
 
         } catch (JSONException e) {
