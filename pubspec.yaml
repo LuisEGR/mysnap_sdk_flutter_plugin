@@ -31,9 +31,9 @@ flutter:
         package: net.stratplus.my_snap_sdk
         pluginClass: MySnapSdkPlugin
       ios:
-        pluginClass: MySnapSdkPlugin
+        pluginClass: SdkPlugin
 
-  # To add assets to your plugin package, add an assets section, like this:
+  # To add assets to your plugin package, add an assæets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
