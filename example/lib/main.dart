@@ -77,7 +77,19 @@ class _MyAppState extends State<MyApp> {
         body: Center(
           child: Column(
             children: <Widget>[
-              new Image.memory(bytes, width: 200, height: 400,), // Image to draw
+
+              ClipRRect(
+                  borderRadius: BorderRadius.circular(10.0),
+                  child:
+                    Container(
+                    decoration: BoxDecoration(color: Colors.brown),
+                    child: new Image.memory(bytes, // Image to draw,
+                      width: 300, 
+                      //height: 200,
+                    ), 
+                    )
+              ),
+              //new Image.memory(bytes, width: 200, height: 400,), // Image to draw
               RaisedButton(
                 onPressed: () => {startGettingPicture()},
                 child: Text("START!"),
