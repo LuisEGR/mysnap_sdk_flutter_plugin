@@ -19,7 +19,7 @@ MySnapSDK Flutter Plugin
 
   s.source_files = 'Classes/**/*'
   s.public_header_files = 'Classes/**/*.h'
-  s.resource_bundles = { 'Classes' => 'Classes/**/*.storyboard'}
+  # s.resource_bundles = { 'Classes' => 'Classes/**/*.storyboard'}
   s.vendored_frameworks = 'MiSnapSDK.framework', 'MiSnapSDKCamera.framework', 'MiSnapSDKMibiData.framework', 'MiSnapSDKScience.framework', 'MobileFlow.framework'
   s.frameworks = 'UIKit', 'Foundation', 'ImageIO','Security','QuartzCore','OpenGLES','MobileCoreServices', 'CoreVideo', 'CoreMedia', 'CoreGraphics', 'AVFoundation', 'AudioToolbox'
   s.resources = ['Classes/*.storyboard', 'MiSnapUX/UX2_Files/Resources/*', 'MiSnapUX/UX_Resources/*']
