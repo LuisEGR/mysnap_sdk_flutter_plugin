@@ -33,7 +33,8 @@ MySnapSDK Flutter Plugin
   s.frameworks = 'UIKit', 'Foundation', 'ImageIO','Security','QuartzCore','OpenGLES','MobileCoreServices', 'CoreVideo', 'CoreMedia', 'CoreGraphics', 'AVFoundation', 'AudioToolbox'
   s.resources = [
         'MiSnapUX/UX2_Files/Storyboard/MiSnapUX2.storyboard',
-        'MiSnapUX/UX2_Files/Resources/*', 
+        'MiSnapUX/UX2_Files/Resources/*.png', 
+        'MiSnapUX/UX2_Files/Resources/wink/*.png',
         'MiSnapUX/UX_Resources/*.png',
         'MiSnapUX/UX_Resources/*.jpg',
         'MiSnapUX/UX_Resources/es.lproj/*'
