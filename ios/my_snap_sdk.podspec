@@ -17,12 +17,20 @@ MySnapSDK Flutter Plugin
   s.dependency 'Flutter'
   s.platform = :ios, '8.0'
 
-  s.source_files = 'Classes/**/*'
-  s.public_header_files = 'Classes/**/*.h'
+  s.public_header_files = [
+        'Classes/SdkPlugin.h', 
+        'MiSnapUX/UX_Files/*.h',
+        'MiSnapUX/UX2_Files/*.h']
+  s.source_files = [
+        'Classes/**/*', 
+        'MiSnapUX/UX_Files/**/*.m',
+        'MiSnapUX/UX2_Files/**/*.m',
+        'MiSnapUX/UX_Files/**/*.h',
+        'MiSnapUX/UX2_Files/**/*.h']
   # s.resource_bundles = { 'Classes' => 'Classes/**/*.storyboard'}
   s.vendored_frameworks = 'MiSnapSDK.framework', 'MiSnapSDKCamera.framework', 'MiSnapSDKMibiData.framework', 'MiSnapSDKScience.framework', 'MobileFlow.framework'
   s.frameworks = 'UIKit', 'Foundation', 'ImageIO','Security','QuartzCore','OpenGLES','MobileCoreServices', 'CoreVideo', 'CoreMedia', 'CoreGraphics', 'AVFoundation', 'AudioToolbox'
-  s.resources = ['Classes/*.storyboard', 'MiSnapUX/UX2_Files/Resources/*', 'MiSnapUX/UX_Resources/*']
+  s.resources = ['MiSnapUX/UX2_Files/Storyboard/MiSnapUX2.storyboard','MiSnapUX/UX2_Files/Resources/*', 'MiSnapUX/UX_Resources/*']
   s.info_plist = {
   'CFBundleIdentifier' => 'com.myorg.MyLib',
   'Privacy - Camera Usage Description' => 'Necesito acceder a tu camara'
