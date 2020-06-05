@@ -30,7 +30,13 @@ MySnapSDK Flutter Plugin
   # s.resource_bundles = { 'Classes' => 'Classes/**/*.storyboard'}
   s.vendored_frameworks = 'MiSnapSDK.framework', 'MiSnapSDKCamera.framework', 'MiSnapSDKMibiData.framework', 'MiSnapSDKScience.framework', 'MobileFlow.framework'
   s.frameworks = 'UIKit', 'Foundation', 'ImageIO','Security','QuartzCore','OpenGLES','MobileCoreServices', 'CoreVideo', 'CoreMedia', 'CoreGraphics', 'AVFoundation', 'AudioToolbox'
-  s.resources = ['MiSnapUX/UX2_Files/Storyboard/MiSnapUX2.storyboard','MiSnapUX/UX2_Files/Resources/*', 'MiSnapUX/UX_Resources/*']
+  s.resources = [
+        'MiSnapUX/UX2_Files/Storyboard/MiSnapUX2.storyboard',
+        'MiSnapUX/UX2_Files/Resources/*', 
+        'MiSnapUX/UX_Resources/*.png',
+        'MiSnapUX/UX_Resources/*.jpg',
+        'MiSnapUX/UX_Resources/es.lproj/*'
+    ]
   s.info_plist = {
   'CFBundleIdentifier' => 'com.myorg.MyLib',
   'Privacy - Camera Usage Description' => 'Necesito acceder a tu camara'
