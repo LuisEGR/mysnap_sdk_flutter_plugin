@@ -18,7 +18,7 @@ MySnapSDK Flutter Plugin
   s.platform = :ios, '8.0'
 
   s.public_header_files = [
-        'Classes/SdkPlugin.h', 
+        'Classes/**/*.h', 
         'MiSnapUX/UX_Files/*.h',
         'MiSnapUX/UX2_Files/*.h']
   s.source_files = [
@@ -27,6 +27,7 @@ MySnapSDK Flutter Plugin
         'MiSnapUX/UX2_Files/**/*.m',
         'MiSnapUX/UX_Files/**/*.h',
         'MiSnapUX/UX2_Files/**/*.h']
+    
   # s.resource_bundles = { 'Classes' => 'Classes/**/*.storyboard'}
   s.vendored_frameworks = 'MiSnapSDK.framework', 'MiSnapSDKCamera.framework', 'MiSnapSDKMibiData.framework', 'MiSnapSDKScience.framework', 'MobileFlow.framework'
   s.frameworks = 'UIKit', 'Foundation', 'ImageIO','Security','QuartzCore','OpenGLES','MobileCoreServices', 'CoreVideo', 'CoreMedia', 'CoreGraphics', 'AVFoundation', 'AudioToolbox'
@@ -41,6 +42,7 @@ MySnapSDK Flutter Plugin
   'CFBundleIdentifier' => 'com.myorg.MyLib',
   'Privacy - Camera Usage Description' => 'Necesito acceder a tu camara'
 }
+  s.static_framework = true
 
   # Flutter.framework does not contain a i386 slice. Only x86_64 simulators are supported.
   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'VALID_ARCHS[sdk=iphonesimulator*]' => 'x86_64' }
