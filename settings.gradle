@@ -1,5 +1,4 @@
 include ':my_snap_sdk', ':api-release', ':flutter', ':misnapcamera-release', ':misnapworkflow-release', ':misnapscience-release', ':mibidata-release', ':imageutils-release', ':misnapcontroller-release', ':sanselan-release', ':misnapworkflow_UX2-release', ':barcode-release', ':barcodecontroller-release', ':misnaphybridcontroller-release', ':cardio-release', ':creditcardcontroller-release'
-include ':api-release'
 
 
 project(':my_snap_sdk').projectDir = file('android')
