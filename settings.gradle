@@ -18,7 +18,7 @@ project(':cardio-release').projectDir = file('android/cardio-release')
 
 project(':misnapcontroller-release').projectDir = file('android/misnapcontroller-release')
 project(':misnapworkflow-release').projectDir = file('android/misnapworkflow-release')
-project(':misnapworkflow_UX2-release').projectDir = file('android/misnapworkflow_UX2-release')
+project(':misnapworkflow_UX2-release').projectDir = file('android/misnapworkflow_UX2')
 project(':creditcardcontroller-release').projectDir = file('android/creditcardcontroller-release')
 project(':misnaphybridcontroller-release').projectDir = file('android/misnaphybridcontroller-release')
 
