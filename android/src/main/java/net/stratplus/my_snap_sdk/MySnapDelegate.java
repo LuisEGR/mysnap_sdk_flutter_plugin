@@ -49,60 +49,49 @@ public class MySnapDelegate implements PluginRegistry.ActivityResultListener{
 
     @Override
     public boolean onActivityResult(int requestCode, int resultCode, Intent data) {
-        byte[] rawImage = data.getByteArrayExtra(MiSnapApi.RESULT_PICTURE_DATA);
-        if (rawImage == null || rawImage.length == 0) {
-            Log.d("ActivityResult", "NO RAW DATA");
-            return false;
-        }
+        
+        if (MiSnapApi.RESULT_PICTURE_CODE == requestCode) {
+            byte[] rawImage = data.getByteArrayExtra(MiSnapApi.RESULT_PICTURE_DATA);
+            if (rawImage == null || rawImage.length == 0) {
+                Log.d("ActivityResult", "NO RAW DATA");
+                return false;
+            }
+            ArrayList<Point> fc = data.getParcelableArrayListExtra(MiSnapApi.RESULT_FOUR_CORNERS);
+            String b64Image = encodeToBase64(rawImage);
 
+            String mibi = data.getStringExtra(MiSnapApi.RESULT_MIBI_DATA);
+    
+            Log.d("MIBI:", mibi);
+            //Log.d("IMAGE:", b64Image);
+            //}
+    
+            imageBitmap = formBitmapImage(rawImage);
+    
+            Log.d("WIDTH", imageBitmap.getWidth()+"");
+            Log.d("HEIGHT", imageBitmap.getHeight()+"");
+    
+            Log.d("FOurCorn:", fc.toString());
+    
+            int x, y, maxX, maxY, w, h;
+            int margen = 10;
+    
+            x = Math.min(fc.get(0).x, fc.get(3).x) - margen;
+            y = Math.min(fc.get(0).y, fc.get(1).y) - margen;
+            maxX = Math.max(fc.get(1).x, fc.get(2).x) + margen;
+            maxY = Math.max(fc.get(3).y, fc.get(2).y) + margen;
+            w = maxX - x;
+            h = maxY - y;
+            Bitmap bitmapCortado = Bitmap.createBitmap(imageBitmap, x, y, w, h);
 
+            imageBitmap.recycle();
+            byte[] B64 = bitmapToPngB64(bitmapCortado);
+            Log.d("B64Len", B64.length+"");
+            bitmapCortado.recycle();
 
-        ArrayList<Point> fc = data.getParcelableArrayListExtra(MiSnapApi.RESULT_FOUR_CORNERS);
-
-
-
-
-        //pendingResult.success("Android READY MDFCK!");
-        //result.success("Android " + android.os.Build.VERSION.RELEASE);
-
-        //if (MiSnapApi.RESULT_PICTURE_CODE == requestCode) {
-        String b64Image = encodeToBase64(rawImage);
-
-        String mibi = data.getStringExtra(MiSnapApi.RESULT_MIBI_DATA);
-
-        Log.d("MIBI:", mibi);
-        //Log.d("IMAGE:", b64Image);
-        //}
-
-        imageBitmap = formBitmapImage(rawImage);
-
-        Log.d("WIDTH", imageBitmap.getWidth()+"");
-        Log.d("HEIGHT", imageBitmap.getHeight()+"");
-
-        Log.d("FOurCorn:", fc.toString());
-
-        int x, y, maxX, maxY, w, h;
-        int margen = 10;
-
-        x = Math.min(fc.get(0).x, fc.get(3).x) - margen;
-        y = Math.min(fc.get(0).y, fc.get(1).y) - margen;
-        maxX = Math.max(fc.get(1).x, fc.get(2).x) + margen;
-        maxY = Math.max(fc.get(3).y, fc.get(2).y) + margen;
-        w = maxX - x;
-        h = maxY - y;
-
-
-
-        Bitmap bitmapCortado = Bitmap.createBitmap(imageBitmap, x, y, w, h);
-
-        imageBitmap.recycle();
-        byte[] B64 = bitmapToPngB64(bitmapCortado);
-        Log.d("B64Len", B64.length+"");
-        bitmapCortado.recycle();
-
-        //Log.d("IMAGE_PNG:", B64);
-        this.activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        pendingResult.success(B64);
+            //Log.d("IMAGE_PNG:", B64);
+            this.activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+            pendingResult.success(B64);
+        }   
         return false;
     }
 
