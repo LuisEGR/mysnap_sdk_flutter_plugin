@@ -50,7 +50,8 @@ public class MySnapDelegate implements PluginRegistry.ActivityResultListener{
     @Override
     public boolean onActivityResult(int requestCode, int resultCode, Intent data) {
         
-        if (MiSnapApi.RESULT_PICTURE_CODE == requestCode) {
+        if (MiSnapApi.RESULT_PICTURE_CODE == requestCode && resultCode == -1) {
+            if(MiSnapApi.RESULT_PICTURE_DATA == null) return false;
             byte[] rawImage = data.getByteArrayExtra(MiSnapApi.RESULT_PICTURE_DATA);
             if (rawImage == null || rawImage.length == 0) {
                 Log.d("ActivityResult", "NO RAW DATA");
