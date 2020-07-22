@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
+import android.graphics.Bitmap.CompressFormat;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -66,28 +67,35 @@ public class MySnapDelegate implements PluginRegistry.ActivityResultListener{
             //Log.d("IMAGE:", b64Image);
             //}
     
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+
             imageBitmap = formBitmapImage(rawImage);
+            // imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100);
+            // bmp.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+
     
             Log.d("WIDTH", imageBitmap.getWidth()+"");
             Log.d("HEIGHT", imageBitmap.getHeight()+"");
     
-            Log.d("FOurCorn:", fc.toString());
-    
-            int x, y, maxX, maxY, w, h;
-            int margen = 10;
-    
-            x = Math.min(fc.get(0).x, fc.get(3).x) - margen;
-            y = Math.min(fc.get(0).y, fc.get(1).y) - margen;
-            maxX = Math.max(fc.get(1).x, fc.get(2).x) + margen;
-            maxY = Math.max(fc.get(3).y, fc.get(2).y) + margen;
-            w = maxX - x;
-            h = maxY - y;
-            Bitmap bitmapCortado = Bitmap.createBitmap(imageBitmap, x, y, w, h);
 
-            imageBitmap.recycle();
-            byte[] B64 = bitmapToPngB64(bitmapCortado);
+            // Log.d("FOurCorn:", fc.toString());
+    
+            // int x, y, maxX, maxY, w, h;
+            // int margen = 10;
+    
+            // x = Math.min(fc.get(0).x, fc.get(3).x) - margen;
+            // y = Math.min(fc.get(0).y, fc.get(1).y) - margen;
+            // maxX = Math.max(fc.get(1).x, fc.get(2).x) + margen;
+            // maxY = Math.max(fc.get(3).y, fc.get(2).y) + margen;
+            // w = maxX - x;
+            // h = maxY - y;
+            // Bitmap bitmapCortado = Bitmap.createBitmap(imageBitmap, x, y, w, h);
+
+            // imageBitmap.recycle();
+            // byte[] B64 = bitmapToPngB64(bitmapCortado);
+            byte[] B64 = bitmapToJPEGB64(imageBitmap);
             Log.d("B64Len", B64.length+"");
-            bitmapCortado.recycle();
+            imageBitmap.recycle();
 
             //Log.d("IMAGE_PNG:", B64);
             this.activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -130,6 +138,22 @@ public class MySnapDelegate implements PluginRegistry.ActivityResultListener{
 
         return b;
     }
+
+    public static byte[] bitmapToJPEGB64(Bitmap image)
+    {
+        Bitmap immagex=image;
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        immagex.compress(Bitmap.CompressFormat.JPEG, 98, baos);
+        byte[] b = baos.toByteArray();
+        //String imageEncoded = Base64.encodeToString(b, Base64.DEFAULT);
+
+        //return imageEncoded;
+
+        return b;
+    }
+
+
+    
 
 
 
