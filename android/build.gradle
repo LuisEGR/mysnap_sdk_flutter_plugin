@@ -101,7 +101,7 @@ dependencies {
     implementation (project(':sanselan-release'))
     implementation project(':misnapworkflow-release')
     implementation project(':misnapcontroller-release')
-    implementation project(':misnapworkflow_UX2-release')
+    implementation project(path:':misnapworkflow_UX2-release', configuration: 'default')
 
     implementation (project(':cardio-release'))
     implementation project(':creditcardcontroller-release')
